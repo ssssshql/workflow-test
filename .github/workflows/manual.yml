@@ -22,7 +22,7 @@ jobs:
       - run: tar -zcvf frotend.tar.gz ./vite-project/dist
       - name: Release
         uses: softprops/action-gh-release@v2
-        # if: github.ref_type == 'tag'
+        if: github.ref_type == 'tag'
         with:
           files: |
             frotend.tar.gz
