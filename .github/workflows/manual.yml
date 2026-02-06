@@ -19,6 +19,13 @@ jobs:
           name: frontend
           # A file, directory or wildcard pattern that describes what to upload
           path: ./vite-project/dist
+      - run: tar -zcxvf frotend.tar.gz ./vite-project/dist
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        # if: github.ref_type == 'tag'
+        with:
+          files: |
+            frotend.tar.gz
       
       
         
