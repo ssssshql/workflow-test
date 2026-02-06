@@ -1,26 +1,25 @@
-name: Test workflow
+name: build-vue
 on: push
 jobs:
   job1:
     name: jb1
     runs-on: ubuntu-latest
     steps:
-      - run: echo hello
-      - uses: actions/setup-node@v6.2.0
-        with:
-          # Version Spec of the version to use. Examples: 12.x, 10.15.1, >=10.15.0.
-          node-version: v22.22.0
-      - run: node -v
-      - run: npm -v
-      - run: ls
-      - uses: actions/checkout@v6.0.2
-      - run: ls
-      - id: test
-        run: echo "I am ssssshql" >> 1.txt
+      - name: Checkout
+        uses: actions/checkout@v6.0.2
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v6.2.0
+        with: 
+          node-version: 22.22.0
+      - run: npm install -g pnpm && pnpm install && pnpm run build
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v6.0.0
         with:
+          # Artifact name
+          name: frontend
           # A file, directory or wildcard pattern that describes what to upload
-          path: ./1.txt
+          path: ./dist
+      
+      
         
 
