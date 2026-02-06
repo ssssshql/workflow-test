@@ -4,6 +4,8 @@ jobs:
   job1:
     name: jb1
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # 必须的权限：创建Release、上传产物都依赖这个
     steps:
       - name: Checkout
         uses: actions/checkout@v6.0.2
@@ -26,6 +28,9 @@ jobs:
         with:
           files: |
             frotend.tar.gz
+        env:
+          # 补充：加上默认GITHUB_TOKEN（之前可能漏了，不加会权限不足）
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
       
         
